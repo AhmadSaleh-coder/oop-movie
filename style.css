@@ -1,3 +1,4 @@
+
 #movie-backdrop {
     width: 100%;
 }
@@ -8,4 +9,33 @@
 
 #actors {
     margin: 24px 16px 0 0;
+}
+
+.nav{
+    margin-left:10px;
+}
+
+
+.navbar-brand img{
+    height:70px;
+    width:70px;
+}
+
+.nav-item{
+    font-size:22px;
+    padding:8px;
+}
+
+.form-control{
+    width:200px;
+}
+
+body{
+    background-color: #a3cfbe;
+}
+
+footer{
+    background-color: #c4cbc8;
+    margin-bottom:0;
+    /* position:fixed; */
 }

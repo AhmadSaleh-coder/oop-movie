@@ -27,13 +27,17 @@ class APIService {
 }
 
 class HomePage {
-    static container = document.getElementById('container');
+    static container = document.querySelector('.row');
     static renderMovies(movies) {
         movies.forEach(movie => {
             const movieDiv = document.createElement("div");
+            movieDiv.classList='col-lg-4 col-sm-12 col-md-6 d-flex flex-column align-items-center'
             const movieImage = document.createElement("img");
             movieImage.src = `${movie.backdropUrl}`;
-            const movieTitle = document.createElement("h3");
+            movieImage.classList='img-fluid'
+            movieImage.style= "width:300px;"
+            movieImage.style= "height:200px;"
+            const movieTitle = document.createElement("h5");
             movieTitle.textContent = `${movie.title}`;
             movieImage.addEventListener("click", function() {
                 Movies.run(movie);
@@ -68,7 +72,7 @@ class MovieSection {
         MoviePage.container.innerHTML = `
       <div class="row">
         <div class="col-md-4">
-          <img id="movie-backdrop" src=${movie.backdropUrl}> 
+          <img id="movie-backdrop" src=${movie.backdropUrl}>
         </div>
         <div class="col-md-8">
           <h2 id="movie-title">${movie.title}</h2>
