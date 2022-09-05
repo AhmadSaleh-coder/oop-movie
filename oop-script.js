@@ -7,6 +7,7 @@ class App {
     }
 }
 
+//api key 9d89c6af3c3fafed4c909cb6c9cc7353
 class APIService {
     static TMDB_BASE_URL = 'https://api.themoviedb.org/3';
     static async fetchMovies() {
@@ -24,6 +25,17 @@ class APIService {
     static _constructUrl(path) {
         return `${this.TMDB_BASE_URL}/${path}?api_key=${atob('NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=')}`;
     }
+
+    //fetching movie cast
+    static async fetchActors(movie_id){
+        const url = APIService._constructUrl(`movie/${movie_id}/credits`)
+        const response = await fetch(url)
+        const data = await response.json()
+        // console.log(data)
+        return data.cast
+    }
+
+
 }
 
 class HomePage {
@@ -34,7 +46,7 @@ class HomePage {
             movieDiv.classList='col-lg-4 col-sm-12 col-md-6 d-flex flex-column align-items-center'
             const movieImage = document.createElement("img");
             movieImage.src = `${movie.backdropUrl}`;
-            movieImage.classList='img-fluid'
+            movieImage.classList='card-img-top'
             movieImage.style= "width:300px;"
             movieImage.style= "height:200px;"
             const movieTitle = document.createElement("h5");
@@ -54,9 +66,12 @@ class HomePage {
 class Movies {
     static async run(movie) {
         const movieData = await APIService.fetchMovie(movie.id)
+        // console.log(movieData)
         MoviePage.renderMovieSection(movieData);
-        APIService.fetchActors(movieData)
-
+        // APIService.fetchActors(movieData.id)
+        const movieCredits = await APIService.fetchActors(movieData.id)
+        // console.log(movieCredits)
+        MoviePage.renderMovieCast(movieCredits);
     }
 }
 
@@ -64,6 +79,9 @@ class MoviePage {
     static container = document.getElementById('container');
     static renderMovieSection(movie) {
         MovieSection.renderMovie(movie);
+    }
+    static renderMovieCast (movie){
+        MovieSection.renderCast(movie);
     }
 }
 
@@ -86,7 +104,31 @@ class MovieSection {
       <h3>Actors:</h3>
     `;
     }
+    static renderCast(movie) {
+        console.log(movie)
+        const div = document.createElement('div');
+
+
+        let template=  `
+        <div class='col-12'
+        <h2>Cast</h2>
+        <div class="cast-list">
+        <ol class="people scroller">
+
+        </ol>
+        </div>
+        </div>`
+
+
+        div.innerHTML = template;
+        MoviePage.container.appendChild(div);
+
+
+
+    }
+
 }
+
 
 class Movie {
     static BACKDROP_BASE_URL = 'http://image.tmdb.org/t/p/w780';
@@ -102,6 +144,10 @@ class Movie {
     get backdropUrl() {
         return this.backdropPath ? Movie.BACKDROP_BASE_URL + this.backdropPath : "";
     }
+
 }
+
+
+
 
 document.addEventListener("DOMContentLoaded", App.run);
