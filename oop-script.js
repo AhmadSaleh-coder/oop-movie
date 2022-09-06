@@ -101,29 +101,26 @@ class MovieSection {
           <p id="movie-overview">${movie.overview}</p>
         </div>
       </div>
-      <h3>Actors:</h3>
+      <h3>Movie Cast:</h3>
     `;
     }
     static renderCast(movie) {
-        console.log(movie)
-        const div = document.createElement('div');
+        const actorDiv = document.createElement("div");
+        actorDiv.classList='row gx-3 my-2'
+        movie.forEach(movie => {
 
-
-        let template=  `
-        <div class='col-12'
-        <h2>Cast</h2>
-        <div class="cast-list">
-        <ol class="people scroller">
-
-        </ol>
-        </div>
-        </div>`
-
-
-        div.innerHTML = template;
-        MoviePage.container.appendChild(div);
-
-
+            const actorCard= document.createElement('div')
+            actorCard.classList=' col-md-2 col-sm-4 col-6"'
+            const actorImage = document.createElement("img");
+            actorImage.src = `https://image.tmdb.org/t/p/original${movie.profile_path}`;
+            actorImage.classList='img-fluid'
+            const actorName = document.createElement("h6");
+            actorName.textContent = `${movie.name}`;
+            actorCard.appendChild(actorName);
+            actorCard.appendChild(actorImage);
+            actorDiv.appendChild(actorCard);
+            MoviePage.container.appendChild(actorDiv);
+        })
 
     }
 
