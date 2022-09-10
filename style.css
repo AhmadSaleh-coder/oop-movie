@@ -45,3 +45,42 @@ footer{
     margin-bottom: 0px;
     margin-top: 0px;
 }
+
+div.searchResult-card.col-md-2.col-sm-3.col-6{
+    flex: 0 0 auto;
+    width: 25%;
+}
+
+.img-fluid{
+    max-width: 100%;
+    height: auto;
+    box-sizing: border-box;
+}
+
+div.searchResult-card.col-md-2.col-sm-3.col-6 h4{
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    font-size: calc(1.275rem + .3vw);
+    box-sizing: border-box;
+    margin-top: 0;
+    margin-bottom: .5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+#movieRow{
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin: 20px 0;
+    border: 1px solid rgba(var(--lightGrey), 1);
+    padding-bottom: 10px;
+    border-radius: var(--imageBorderRadius);
+    /* min-height: calc(208px * 1.5); */
+}
